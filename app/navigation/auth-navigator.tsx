@@ -7,7 +7,7 @@
 import React from "react"
 
 import { createNativeStackNavigator } from "react-native-screens/native-stack"
-import { LoginScreen } from "../screens"
+import { LoginScreen, PasswordScreen } from "../screens"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -23,6 +23,7 @@ import { LoginScreen } from "../screens"
  */
 export type AuthParamList = {
   login: undefined
+  password: undefined
 }
 
 // Documentation: https://github.com/software-mansion/react-native-screens/tree/master/native-stack
@@ -37,6 +38,7 @@ export function AuthNavigator() {
       }}
     >
       <Stack.Screen name="login" component={LoginScreen} />
+      <Stack.Screen name="password" component={PasswordScreen} />
     </Stack.Navigator>
   )
 }
