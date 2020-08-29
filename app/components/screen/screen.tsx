@@ -4,10 +4,10 @@ import {
   Platform,
   ScrollView,
   StatusBar,
-  View,
   Keyboard,
   TouchableWithoutFeedback,
 } from "react-native"
+import { Layout } from '@ui-kitten/components'
 import { useSafeArea } from "react-native-safe-area-context"
 import { ScreenProps } from "./screen.props"
 import { isNonScrolling, offsets, presets } from "./screen.presets"
@@ -33,7 +33,7 @@ function ScreenWithoutScrolling(props: ScreenProps) {
         keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
       >
         <StatusBar barStyle={props.statusBar || "light-content"} />
-        <View style={[preset.inner, style, insetStyle]}>{props.children}</View>
+        <Layout style={[preset.inner, style, insetStyle]}>{props.children}</Layout>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   )
@@ -53,14 +53,14 @@ function ScreenWithScrolling(props: ScreenProps) {
       keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
     >
       <StatusBar barStyle={props.statusBar || "light-content"} />
-      <View style={[preset.outer, backgroundStyle, insetStyle]}>
+      <Layout style={[preset.outer, backgroundStyle, insetStyle]}>
         <ScrollView
           style={[preset.outer, backgroundStyle]}
           contentContainerStyle={[preset.inner, style]}
         >
           {props.children}
         </ScrollView>
-      </View>
+      </Layout>
     </KeyboardAvoidingView>
   )
 }

@@ -24,12 +24,13 @@ import {
   setRootNavigation,
   useNavigationPersistence,
 } from "./navigation"
-import { RootStore, RootStoreProvider, setupRootStore } from "./models"
+import { RootStore, RootStoreProvider, setupRootStore, useStores } from "./models"
 
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
 // https://github.com/kmagiera/react-native-screens#using-native-stack-navigator
 import { enableScreens } from "react-native-screens"
+import { observer } from "mobx-react-lite"
 enableScreens()
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
@@ -64,17 +65,29 @@ function App() {
   // otherwise, we're ready to render the app
   return (
     <RootStoreProvider value={rootStore}>
-      <ApplicationProvider {...eva} theme={rootStore.darkMode ? eva.dark : eva.light}>
-        <SafeAreaProvider initialSafeAreaInsets={initialWindowSafeAreaInsets}>
-          <RootNavigator
-            ref={navigationRef}
-            initialState={initialNavigationState}
-            onStateChange={onNavigationStateChange}
-          />
-        </SafeAreaProvider>
-      </ApplicationProvider>
+      <MainScreen
+        onNavigationStateChange={onNavigationStateChange}
+        navigationRef={navigationRef}
+        initialNavigationState={initialNavigationState}
+      />
     </RootStoreProvider>
   )
 }
+
+const MainScreen = observer(function MainScreen(props: any) {
+  const { navigationRef, initialNavigationState, onNavigationStateChange } = props
+  const { darkMode } = useStores()
+  return (
+    <ApplicationProvider {...eva} theme={darkMode ? eva.dark : eva.light}>
+      <SafeAreaProvider initialSafeAreaInsets={initialWindowSafeAreaInsets}>
+        <RootNavigator
+          ref={navigationRef}
+          initialState={initialNavigationState}
+          onStateChange={onNavigationStateChange}
+        />
+      </SafeAreaProvider>
+    </ApplicationProvider>
+  )
+})
 
 export default App
