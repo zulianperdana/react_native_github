@@ -10,8 +10,13 @@ import { SearchModel } from "../search/search"
 export const RootStoreModel = types.model("RootStore").props({
   commitStore: types.optional(CommitStoreModel, {}),
   user: types.optional(UserModel, {} as any),
-  search: types.optional(SearchModel, {} as any)
-})
+  search: types.optional(SearchModel, {} as any),
+  darkMode: types.optional(types.boolean, false),
+}).actions((self) => ({
+  setDarkMode(darkMode: boolean) {
+    self.darkMode = darkMode
+  },
+}))
 
 /**
  * The RootStore instance.

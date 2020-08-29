@@ -64,7 +64,7 @@ function App() {
   // otherwise, we're ready to render the app
   return (
     <RootStoreProvider value={rootStore}>
-      <ApplicationProvider {...eva} theme={eva.light}>
+      <ApplicationProvider {...eva} theme={rootStore.darkMode ? eva.dark : eva.light}>
         <SafeAreaProvider initialSafeAreaInsets={initialWindowSafeAreaInsets}>
           <RootNavigator
             ref={navigationRef}
