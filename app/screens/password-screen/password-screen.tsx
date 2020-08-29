@@ -55,7 +55,7 @@ export const PasswordScreen = observer(function PasswordScreen() {
       try {
         const success: boolean = await login(username, passwordForm)
         if (success) {
-          navigation.navigate("main")
+          navigation.navigate("home")
         } else {
           setStatus("danger")
           setCaption("login.username_validation_2")
