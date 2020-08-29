@@ -78,6 +78,7 @@ export const PasswordScreen = observer(function PasswordScreen() {
   return (
     <Screen style={styles.root}>
       <SafeAreaView />
+      <BackButton />
       <Layout style={styles.header}>
         <Layout style={styles.headerImageContainer}>
           <Avatar size="giant" source={{ uri: avatarUrl }} />
