@@ -1,3 +1,4 @@
+import { CommitStoreModel } from "../commit-store/commit-store"
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import { UserModel } from "../user/user"
 import { SearchModel } from "../search/search"
@@ -7,6 +8,7 @@ import { SearchModel } from "../search/search"
  */
 // prettier-ignore
 export const RootStoreModel = types.model("RootStore").props({
+  commitStore: types.optional(CommitStoreModel, {}),
   user: types.optional(UserModel, {} as any),
   search: types.optional(SearchModel, {} as any)
 })

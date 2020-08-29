@@ -2,6 +2,7 @@ import { ApisauceInstance, create, ApiResponse } from "apisauce"
 import { getGeneralApiProblem } from "./api-problem"
 import { ApiConfig, DEFAULT_API_CONFIG } from "./api-config"
 import { UserDetails } from "../../models/user/user"
+import { CommitItem } from "../../models/commit/commit"
 import * as Types from "./api.types"
 
 /**
@@ -78,7 +79,7 @@ export class Api {
   }
 
   /**
-   * Search for repositories by name for autocomplete feature
+   * Search for repositories by name for autocomplete feature, limited to 10 repositories name
    */
 
   async searchRepositories(search: string): Promise<Types.SearchRepositoriesResults> {
@@ -98,6 +99,57 @@ export class Api {
       const { items } = response.data
       const repositories: string[] = items.map((item) => item.full_name)
       return { kind: "ok", repositories }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
+
+  /**
+   * Get list of commits
+   */
+
+  async getCommits(
+    repository: string,
+    username: string,
+    password: string,
+    showOnlyMyCommit: boolean,
+    perPage: number,
+    currentPage: number,
+  ): Promise<Types.CommitResults> {
+    // make the api call
+    const extraQueryString = showOnlyMyCommit ? `&author=${username}` : ""
+    const response: ApiResponse<any> = await this.apisauce.get(
+      `/repos/${repository}/commits?per_page=${perPage}&page=${currentPage}${extraQueryString}`,
+      {},
+      { auth: { username, password } },
+    )
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    // transform the data into the format we are expecting
+    try {
+      const { items } = response.data
+      const commitItems: CommitItem[] = items.map((item) => ({
+        author: {
+          username: item.author.login,
+          url: item.author.url,
+          avatarUrl: item.author.avatar_url,
+        },
+        committer: {
+          username: item.committer.login,
+          url: item.committer.url,
+          avatarUrl: item.committer.avatar_url,
+        },
+        authorTime: item.commit.author.date,
+        commiterTime: item.commit.committer.date,
+        message: item.commit.message,
+        sha: item.sha,
+        commentCount: item.commit.comment_count,
+      }))
+      return { kind: "ok", commits: commitItems }
     } catch {
       return { kind: "bad-data" }
     }
