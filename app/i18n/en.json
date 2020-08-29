@@ -13,5 +13,12 @@
     "greetings_description": "Login using your Github Account to get started",
     "password_greetings_description": "Please input your password / personal access token",
     "password_validation_1": "Invalid credentials"
+  },
+  "home": {
+    "search_label": "Search Repository"
+  },
+  "settings": {
+    "dark_mode": "Dark Mode",
+    "light_mode": "Light Mode"
   }
 }
