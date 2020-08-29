@@ -17,7 +17,8 @@ export const UserModel = types
   .model("User")
   .props({
     userDetails: types.frozen<UserDetails>(),
-    password: types.maybe(types.string),
+    username: types.optional(types.string, ""),
+    password: types.optional(types.string, ""),
   })
   .postProcessSnapshot(omit(["password"])) // prevent password to be stored in async storage, instead use secure keychain
   .extend(withEnvironment)
@@ -27,13 +28,16 @@ export const UserModel = types
       self.userDetails = userDetails
       self.password = password
     },
+    setUsername(username: string) {
+      self.username = username
+    },
     logout() {
       self.password = ""
       self.userDetails = null
     },
   }))
   .actions((self) => ({
-    login: flow(function * (login: string, password: string) {
+    login: flow(function* (login: string, password: string) {
       const result: GithubLoginResult = yield self.environment.api.loginToGithub(login, password)
       console.log(result)
       if (result.kind === "ok") {
@@ -41,7 +45,7 @@ export const UserModel = types
         yield save(result.user.username, password)
       }
     }),
-    loadPassword: flow(function * () {
+    loadPassword: flow(function* () {
       const { password } = yield load()
       self.password = password
     }),
