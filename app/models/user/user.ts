@@ -17,16 +17,20 @@ export const UserModel = types
   .model("User")
   .props({
     userDetails: types.frozen<UserDetails>(),
+    tempUserDetails: types.frozen<UserDetails>(),
     username: types.optional(types.string, ""),
     password: types.optional(types.string, ""),
   })
-  .postProcessSnapshot(omit(["password"])) // prevent password to be stored in async storage, instead use secure keychain
+  .postProcessSnapshot(omit(["password", "tempUserDetails"])) // prevent password to be stored in async storage, instead use secure keychain
   .extend(withEnvironment)
   .views((self) => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
   .actions((self) => ({
     setUser(userDetails: UserDetails, password: string) {
       self.userDetails = userDetails
       self.password = password
+    },
+    setTempUser(userDetails: UserDetails) {
+      self.tempUserDetails = userDetails
     },
     setUsername(username: string) {
       self.username = username
@@ -43,6 +47,13 @@ export const UserModel = types
       if (result.kind === "ok") {
         self.setUser(result.user, password)
         yield save(result.user.username, password)
+      }
+    }),
+    checkUsername: flow(function* (username: string) {
+      const result: GithubLoginResult = yield self.environment.api.getUser(username)
+      if (result.kind === "ok") {
+        self.setTempUser(result.user)
+        return result.user
       }
     }),
     loadPassword: flow(function* () {

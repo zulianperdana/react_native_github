@@ -47,6 +47,34 @@ export class Api {
   }
 
   /**
+   * Check if username is valid
+   */
+
+  async getUser(username: string): Promise<Types.GithubLoginResult> {
+    // make the api call
+    const response: ApiResponse<any> = await this.apisauce.get(`/users/${username}`)
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    // transform the data into the format we are expecting
+    console.log(response.data)
+    try {
+      const { url, login } = response.data
+      const resultUser: UserDetails = {
+        avatarUrl: response.data.avatar_url,
+        url,
+        username: login,
+      }
+      return { kind: "ok", user: resultUser }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
+
+  /**
    * Gets github user details from their username and password/personal access token
    */
 
