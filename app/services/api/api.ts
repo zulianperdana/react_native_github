@@ -159,26 +159,30 @@ export class Api {
 
     // transform the data into the format we are expecting
     try {
-      const { items } = response.data
+      const items = response.data
+      console.log(response.data)
       const commitItems: CommitItem[] = items.map((item) => ({
         author: {
-          username: item.author.login,
-          url: item.author.url,
-          avatarUrl: item.author.avatar_url,
+          username: item.author?.login ?? "",
+          url: item.author?.url ?? "",
+          // eslint-disable-next-line camelcase
+          avatarUrl: item.author?.avatar_url ?? "",
         },
         committer: {
-          username: item.committer.login,
-          url: item.committer.url,
-          avatarUrl: item.committer.avatar_url,
+          username: item.committer?.login ?? "",
+          url: item.committer?.url ?? "",
+          // eslint-disable-next-line camelcase
+          avatarUrl: item.committer?.avatar_url ?? "",
         },
-        authorTime: item.commit.author.date,
-        commiterTime: item.commit.committer.date,
+        authorTime: new Date(item.commit.author?.date ?? 0),
+        commiterTime: new Date(item.commit.committer?.date ?? 0),
         message: item.commit.message,
         sha: item.sha,
         commentCount: item.commit.comment_count,
       }))
       return { kind: "ok", commits: commitItems }
-    } catch {
+    } catch (e) {
+      console.log(e)
       return { kind: "bad-data" }
     }
   }
