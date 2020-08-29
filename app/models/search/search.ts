@@ -1,6 +1,7 @@
 import { Instance, SnapshotOut, types, flow } from "mobx-state-tree"
 import { SearchRepositoriesResults } from "../../services/api/api.types"
 import { withEnvironment } from "../extensions/with-environment"
+import { omit } from "ramda"
 /**
  * Model description here for TypeScript hints.
  */
@@ -11,11 +12,14 @@ export const SearchModel = types
     searchSuggestions: types.optional(types.array(types.string), []),
     searchHistories: types.optional(types.array(types.string), []),
   })
+  .postProcessSnapshot(omit(["searchSuggestions"]))
   .extend(withEnvironment)
   .views((self) => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
   .actions((self) => ({
     addToSearchHistory(search: string) {
-      self.searchHistories.replace([...self.searchHistories, search])
+      if (!self.searchHistories.includes(search)) {
+        self.searchHistories.replace([...self.searchHistories, search])
+      }
     },
     replaceSuggestions(suggestions: string[]) {
       self.searchSuggestions.replace(suggestions)
@@ -29,6 +33,7 @@ export const SearchModel = types
       const result: SearchRepositoriesResults = yield self.environment.api.searchRepositories(
         search,
       )
+      console.log("SUGGESTIONS", result)
       if (result.kind === "ok") {
         self.replaceSuggestions(result.repositories)
       }
