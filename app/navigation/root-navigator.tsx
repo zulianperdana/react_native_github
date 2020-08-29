@@ -9,6 +9,7 @@ import { NavigationContainer, NavigationContainerRef } from "@react-navigation/n
 
 import { createNativeStackNavigator } from "react-native-screens/native-stack"
 import { PrimaryNavigator } from "./primary-navigator"
+import { AuthNavigator } from "./auth-navigator"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -21,7 +22,8 @@ import { PrimaryNavigator } from "./primary-navigator"
  *   https://reactnavigation.org/docs/typescript#type-checking-the-navigator
  */
 export type RootParamList = {
-  primaryStack: undefined
+  primaryStack: undefined,
+  authStack: undefined
 }
 
 const Stack = createNativeStackNavigator<RootParamList>()
@@ -37,8 +39,15 @@ const RootStack = () => {
       }}
     >
       <Stack.Screen
-        name="primaryStack"
+        name="authStack"
         component={PrimaryNavigator}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="primaryStack"
+        component={AuthNavigator}
         options={{
           headerShown: false,
         }}
