@@ -14,7 +14,7 @@ const logoBlack = require("../../../assets/image/logo_black.png")
 const styles = StyleSheet.create({
   content: {
     flexGrow: 3,
-    marginTop: 24
+    marginTop: 24,
   },
   footer: {
     height: 50,
@@ -91,6 +91,7 @@ export const LoginScreen = observer(function LoginScreen() {
           caption={caption !== "" ? translate(caption) : ""}
           value={usernameForm}
           autoCapitalize="none"
+          onSubmitEditing={onPressNext}
           onChangeText={(nextValue) => setUsernameForm(nextValue)}
         />
       </Layout>

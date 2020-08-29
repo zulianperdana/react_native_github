@@ -98,6 +98,7 @@ export const PasswordScreen = observer(function PasswordScreen() {
           caption={caption !== "" ? translate(caption) : ""}
           value={passwordForm}
           accessoryRight={renderIcon}
+          onSubmitEditing={onPressNext}
           autoCapitalize="none"
           onChangeText={(nextValue) => setPasswordForm(nextValue)}
         />
