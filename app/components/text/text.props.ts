@@ -1,5 +1,4 @@
 import { TextStyle, TextProps as TextProperties } from "react-native"
-import { TextPresets } from "./text.presets"
 
 export interface TextProps extends TextProperties {
   /**
@@ -24,12 +23,25 @@ export interface TextProps extends TextProperties {
   text?: string
 
   /**
+   * Ui kitten text category https://akveo.github.io/react-native-ui-kitten/docs/components/text/overview#text
+   */
+  category?:
+    | "h1"
+    | "h2"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "h6"
+    | "s1"
+    | "s2"
+    | "p1"
+    | "p2"
+    | "c1"
+    | "c2"
+    | "label"
+
+  /**
    * An optional style override useful for padding & margin.
    */
   style?: TextStyle | TextStyle[]
-
-  /**
-   * One of the different types of text presets.
-   */
-  preset?: TextPresets
 }
