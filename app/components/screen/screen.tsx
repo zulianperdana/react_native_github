@@ -1,10 +1,22 @@
 import * as React from "react"
-import { KeyboardAvoidingView, Platform, ScrollView, StatusBar, View } from "react-native"
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StatusBar,
+  View,
+  Keyboard,
+  TouchableWithoutFeedback,
+} from "react-native"
 import { useSafeArea } from "react-native-safe-area-context"
 import { ScreenProps } from "./screen.props"
 import { isNonScrolling, offsets, presets } from "./screen.presets"
 
 const isIos = Platform.OS === "ios"
+
+const FLEX = {
+  flex: 1,
+}
 
 function ScreenWithoutScrolling(props: ScreenProps) {
   const insets = useSafeArea()
@@ -14,14 +26,16 @@ function ScreenWithoutScrolling(props: ScreenProps) {
   const insetStyle = { paddingTop: props.unsafe ? 0 : insets.top }
 
   return (
-    <KeyboardAvoidingView
-      style={[preset.outer, backgroundStyle]}
-      behavior={isIos ? "padding" : null}
-      keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
-    >
-      <StatusBar barStyle={props.statusBar || "light-content"} />
-      <View style={[preset.inner, style, insetStyle]}>{props.children}</View>
-    </KeyboardAvoidingView>
+    <TouchableWithoutFeedback style={FLEX} onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        style={[preset.outer, backgroundStyle]}
+        behavior={isIos ? "padding" : null}
+        keyboardVerticalOffset={offsets[props.keyboardOffset || "none"]}
+      >
+        <StatusBar barStyle={props.statusBar || "light-content"} />
+        <View style={[preset.inner, style, insetStyle]}>{props.children}</View>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   )
 }
 
