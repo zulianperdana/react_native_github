@@ -30,6 +30,7 @@
     "@react-navigation/native": "^5.1.5",
     "@reduxjs/toolkit": "^1.4.0",
     "@ui-kitten/components": "^5.0.0",
+    "@ui-kitten/eva-icons": "^5.0.0",
     "apisauce": "1.1.2",
     "i18n-js": "^3.0.11",
     "lodash.throttle": "4.1.1",

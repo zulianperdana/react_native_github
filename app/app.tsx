@@ -14,7 +14,7 @@ import "./utils/ignore-warnings"
 import React, { useState, useEffect, useRef } from "react"
 import { NavigationContainerRef } from "@react-navigation/native"
 import * as eva from "@eva-design/eva"
-import { ApplicationProvider } from "@ui-kitten/components"
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components"
 import { SafeAreaProvider, initialWindowSafeAreaInsets } from "react-native-safe-area-context"
 import * as storage from "./utils/storage"
 import {
@@ -30,6 +30,7 @@ import { RootStore, RootStoreProvider, setupRootStore, useStores } from "./model
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
 // https://github.com/kmagiera/react-native-screens#using-native-stack-navigator
 import { enableScreens } from "react-native-screens"
+import { EvaIconsPack } from "@ui-kitten/eva-icons"
 import { observer } from "mobx-react-lite"
 enableScreens()
 
@@ -78,15 +79,18 @@ const MainScreen = observer(function MainScreen(props: any) {
   const { navigationRef, initialNavigationState, onNavigationStateChange } = props
   const { darkMode } = useStores()
   return (
-    <ApplicationProvider {...eva} theme={darkMode ? eva.dark : eva.light}>
-      <SafeAreaProvider initialSafeAreaInsets={initialWindowSafeAreaInsets}>
-        <RootNavigator
-          ref={navigationRef}
-          initialState={initialNavigationState}
-          onStateChange={onNavigationStateChange}
-        />
-      </SafeAreaProvider>
-    </ApplicationProvider>
+    <>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={darkMode ? eva.dark : eva.light}>
+        <SafeAreaProvider initialSafeAreaInsets={initialWindowSafeAreaInsets}>
+          <RootNavigator
+            ref={navigationRef}
+            initialState={initialNavigationState}
+            onStateChange={onNavigationStateChange}
+          />
+        </SafeAreaProvider>
+      </ApplicationProvider>
+    </>
   )
 })
 
