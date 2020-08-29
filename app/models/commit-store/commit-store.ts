@@ -52,6 +52,7 @@ export const CommitStoreModel = types
         defaultPerPage,
         1,
       )
+      console.log("load repository", result)
       if (result.kind === "ok") {
         self.repositories.set(
           repository,
@@ -64,6 +65,7 @@ export const CommitStoreModel = types
             showOnlyMyCommit: false,
           }),
         )
+        return true
       } else {
         __DEV__ && console.tron.log(result.kind)
       }
