@@ -7,7 +7,6 @@
   },
   "login": {
     "greetings": "How Dy",
-    "username_validation_1": "Should contain at least 1 character",
     "greetings_description": "Login using your Github Account to get started"
   }
 }
