@@ -14,6 +14,7 @@ const logoBlack = require("../../../assets/image/logo_black.png")
 const styles = StyleSheet.create({
   content: {
     flexGrow: 3,
+    marginTop: 24
   },
   footer: {
     height: 50,
