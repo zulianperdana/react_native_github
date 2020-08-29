@@ -10,6 +10,7 @@ import { NavigationContainer, NavigationContainerRef } from "@react-navigation/n
 import { createNativeStackNavigator } from "react-native-screens/native-stack"
 import { PrimaryNavigator } from "./primary-navigator"
 import { AuthNavigator } from "./auth-navigator"
+import { useStores } from "../models"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -22,13 +23,13 @@ import { AuthNavigator } from "./auth-navigator"
  *   https://reactnavigation.org/docs/typescript#type-checking-the-navigator
  */
 export type RootParamList = {
-  primaryStack: undefined,
+  primaryStack: undefined
   authStack: undefined
 }
 
 const Stack = createNativeStackNavigator<RootParamList>()
 
-const RootStack = () => {
+const RootStack = ({ isLoggedIn }: any) => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -38,20 +39,23 @@ const RootStack = () => {
         stackPresentation: "modal",
       }}
     >
-      <Stack.Screen
-        name="authStack"
-        component={PrimaryNavigator}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="primaryStack"
-        component={AuthNavigator}
-        options={{
-          headerShown: false,
-        }}
-      />
+      {!isLoggedIn ? (
+        <Stack.Screen
+          name="authStack"
+          component={AuthNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
+      ) : (
+        <Stack.Screen
+          name="primaryStack"
+          component={PrimaryNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
+      )}
     </Stack.Navigator>
   )
 }
@@ -60,9 +64,11 @@ export const RootNavigator = React.forwardRef<
   NavigationContainerRef,
   Partial<React.ComponentProps<typeof NavigationContainer>>
 >((props, ref) => {
+  const { user } = useStores()
+  const { password } = user
   return (
     <NavigationContainer {...props} ref={ref}>
-      <RootStack />
+      <RootStack isLoggedIn={password !== undefined} />
     </NavigationContainer>
   )
 })
