@@ -76,4 +76,30 @@ export class Api {
       return { kind: "bad-data" }
     }
   }
+
+  /**
+   * Search for repositories by name for autocomplete feature
+   */
+
+  async searchRepositories(search: string): Promise<Types.SearchRepositoriesResults> {
+    const perPage = 10
+    // make the api call
+    const response: ApiResponse<any> = await this.apisauce.get(
+      `/search/repositories?q=${search}%20in:name&per_page=${perPage}`,
+    )
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    // transform the data into the format we are expecting
+    try {
+      const { items } = response.data
+      const repositories: string[] = items.map((item) => item.full_name)
+      return { kind: "ok", repositories }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
 }
