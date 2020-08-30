@@ -110,11 +110,17 @@ export class Api {
    * Search for repositories by name for autocomplete feature, limited to 10 repositories name
    */
 
-  async searchRepositories(search: string): Promise<Types.SearchRepositoriesResults> {
+  async searchRepositories(
+    search: string,
+    username: string,
+    password: string,
+  ): Promise<Types.SearchRepositoriesResults> {
     const perPage = 10
     // make the api call
     const response: ApiResponse<any> = await this.apisauce.get(
       `/search/repositories?q=${search}%20in:name&per_page=${perPage}`,
+      {},
+      { auth: { username, password } },
     )
     // the typical ways to die when calling an api
     if (!response.ok) {
@@ -145,7 +151,7 @@ export class Api {
     currentPage: number,
   ): Promise<Types.CommitResults> {
     // make the api call
-    console.log("GET COMMIT", username, password)
+    console.log("GET COMMIT AUTH", username, password)
     const extraQueryString = showOnlyMyCommit ? `&author=${username}` : ""
     const response: ApiResponse<any> = await this.apisauce.get(
       `/repos/${repository}/commits?per_page=${perPage}&page=${currentPage}${extraQueryString}`,
