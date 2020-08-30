@@ -45,10 +45,6 @@ function App() {
 
   setRootNavigation(navigationRef)
   useBackButtonHandler(navigationRef, canExit)
-  const { initialNavigationState, onNavigationStateChange } = useNavigationPersistence(
-    storage,
-    NAVIGATION_PERSISTENCE_KEY,
-  )
 
   // Kick off initial async loading actions, like loading fonts and RootStore
   useEffect(() => {
@@ -66,28 +62,22 @@ function App() {
   // otherwise, we're ready to render the app
   return (
     <RootStoreProvider value={rootStore}>
-      <MainScreen
-        onNavigationStateChange={onNavigationStateChange}
-        navigationRef={navigationRef}
-        initialNavigationState={initialNavigationState}
-      />
+      <MainScreen navigationRef={navigationRef} />
     </RootStoreProvider>
   )
 }
 
 const MainScreen = observer(function MainScreen(props: any) {
-  const { navigationRef, initialNavigationState, onNavigationStateChange } = props
-  const { darkMode } = useStores()
+  const { navigationRef } = props
+  const { darkMode, user } = useStores()
+  const { password } = user
+  console.log("PASSWORD IS 2", password)
   return (
     <>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={darkMode ? eva.dark : eva.light}>
         <SafeAreaProvider initialSafeAreaInsets={initialWindowSafeAreaInsets}>
-          <RootNavigator
-            ref={navigationRef}
-            initialState={initialNavigationState}
-            onStateChange={onNavigationStateChange}
-          />
+          <RootNavigator password={password} ref={navigationRef} />
         </SafeAreaProvider>
       </ApplicationProvider>
     </>
