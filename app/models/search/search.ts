@@ -29,9 +29,11 @@ export const SearchModel = types
     },
   }))
   .actions((self) => ({
-    fetchSuggestions: flow(function* (search: string) {
+    fetchSuggestions: flow(function* (search: string, username: string, password: string) {
       const result: SearchRepositoriesResults = yield self.environment.api.searchRepositories(
         search,
+        username,
+        password,
       )
       console.log("SUGGESTIONS", result)
       if (result.kind === "ok") {
