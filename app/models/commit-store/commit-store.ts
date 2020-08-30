@@ -14,15 +14,21 @@ export const CommitStoreModel = types
   .views((self) => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
   .extend(withEnvironment)
   .actions((self) => ({
-    loadNextPage: flow(function* (commit: Commit, username: string, password: string, reset: bool) {
-      if (!commit.paginationDone) {
+    loadNextPage: flow(function* (
+      commit: Commit,
+      username: string,
+      password: string,
+      reset: boolean,
+    ) {
+      if (!commit.paginationDone || reset) {
+        const defaultPerPage = 10
         const { repository, perPage, showOnlyMyCommit, currentPage } = commit
         const result: CommitResults = yield self.environment.api.getCommits(
           repository,
           username,
           password,
-          showOnlyMyCommit,
-          perPage,
+          showOnlyMyCommit ?? false,
+          perPage ?? defaultPerPage,
           reset ? 1 : currentPage + 1,
         )
         if (result.kind === "ok") {
@@ -31,9 +37,12 @@ export const CommitStoreModel = types
           } else {
             commit.setCurrentPage(currentPage + 1)
             if (reset) {
+              commit.setPaginationDone(false)
               commit.setCommits(result.commits)
+              console.log("SET COMITS", ...result.commits)
             } else {
               commit.setCommits([...commit.commits, ...result.commits])
+              console.log("SET COMITS", [...commit.commits, ...result.commits])
             }
           }
         } else {

@@ -145,15 +145,23 @@ export class Api {
     currentPage: number,
   ): Promise<Types.CommitResults> {
     // make the api call
+    console.log("GET COMMIT", username, password)
     const extraQueryString = showOnlyMyCommit ? `&author=${username}` : ""
     const response: ApiResponse<any> = await this.apisauce.get(
       `/repos/${repository}/commits?per_page=${perPage}&page=${currentPage}${extraQueryString}`,
       {},
       { auth: { username, password } },
     )
+    console.log(
+      `/repos/${repository}/commits?per_page=${perPage}&page=${currentPage}${extraQueryString}`,
+    )
     // the typical ways to die when calling an api
     if (!response.ok) {
       const problem = getGeneralApiProblem(response)
+      console.log(
+        problem,
+        `/repos/${repository}/commits?per_page=${perPage}&page=${currentPage}${extraQueryString}`,
+      )
       if (problem) return problem
     }
 
