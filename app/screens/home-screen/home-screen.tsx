@@ -25,9 +25,6 @@ const styles = StyleSheet.create({
   repositoryItem: {
     marginBottom: 12,
   },
-  root: {
-    flex: 1,
-  },
   titleContainer: {
     alignItems: "center",
     flexDirection: "row",
@@ -123,7 +120,7 @@ export const HomeScreen = observer(function HomeScreen() {
   )
 
   return (
-    <Screen preset="scroll" style={styles.root}>
+    <Screen preset="scroll">
       <SafeAreaView />
       <TopNavigation title={renderTitle} accessoryRight={MenuActions} />
       <Layout style={styles.body}>
@@ -149,6 +146,7 @@ export const HomeScreen = observer(function HomeScreen() {
           {searchHistories.map(searchHistoryItem)}
         </Card>
       </Layout>
+      <SafeAreaView />
     </Screen>
   )
 })
