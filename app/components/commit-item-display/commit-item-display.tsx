@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 })
 
 export interface CommitItemDisplayProps {
-  commit: any,
+  commit: any
   repository: string
 }
 
@@ -57,7 +57,8 @@ export function CommitItemDisplay({ commit, repository }: any) {
         />
       </TouchableWithoutFeedback>
     )
-
+    const date = new Date(time)
+    const dateTime = `${date.toDateString()} ${date.toTimeString()}`
     return (
       <Layout style={styles.avatarContainer}>
         <Avatar source={{ uri: user.avatarUrl }} />
@@ -65,7 +66,7 @@ export function CommitItemDisplay({ commit, repository }: any) {
           {user.username} {type}
         </Text>
         <Tooltip anchor={renderTimeago} visible={visible} onBackdropPress={() => setVisible(false)}>
-          {new Date(time).toDateString()}
+          {dateTime}
         </Tooltip>
       </Layout>
     )
@@ -77,7 +78,7 @@ export function CommitItemDisplay({ commit, repository }: any) {
         onPress={() => Linking.openURL(`https://github.com/${repository}/commit/${sha}`)}
         size="small"
       >
-        {translate("commits.see_details")} ({commentCount}) {translate("commits.comments")}
+        {`${translate("commits.see_details")} (${commentCount}) ${translate("commits.comments")}`}
       </Button>
     </View>
   )
