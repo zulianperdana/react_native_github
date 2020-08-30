@@ -5,7 +5,7 @@ short video demo https://streamable.com/3995wf
 
 ## Main Features:
 
-- Login using your GitHub account with password / personal access token
+- Login using your GitHub account with password / personal access token (only works with account with no 2 Factor Auth)
 - Browse commit by repository
 - Offline Capability, you can access your search history and their commits without internet connection
 - Dark Mode 
