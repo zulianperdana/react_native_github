@@ -1,5 +1,7 @@
 
-# React Native Github
+# Github
+
+## React Native Github
 
 React Native Github Commit Explorer.
 short video demo https://streamable.com/3995wf
@@ -24,10 +26,15 @@ short video demo https://streamable.com/3995wf
 - Your credential is stored securely with [https://github.com/oblador/react-native-keychain](https://github.com/oblador/react-native-keychain)
 
 ## Screenshoots
-![enter image description here](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss1.png?raw=true)
-![enter image description here](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss2.png?raw=true)
-![enter image description here](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss3.png?raw=true)
-![enter image description here](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss5.png?raw=true)
+
+1             |  2
+:-------------------------:|:-------------------------:
+![enter image description here](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss1.png?raw=true =350x)  |  ![enter image description here](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss2.png?raw=true =350x)
+
+3             |  4
+:-------------------------:|:-------------------------:
+![enter image description here](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss3.png?raw=true =350x)  |  ![enter image description here](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss5.png?raw=true =350x)
+
 
 ## Made with:
 - Typescript
@@ -37,9 +44,9 @@ short video demo https://streamable.com/3995wf
 
 Make sure you have your React Native environment set up.
 ```
-1. git clone https://github.com/zulianperdana/react_native_github.git
+1. git clone https://github.com/zulianperdana/react_native_github.git```
 2. cd react_native_github
-3. yarn install
+3. yarn install / npm install
 4. react-native run-ios / react-native run-android
 ```
 
@@ -47,6 +54,7 @@ Make sure you have your React Native environment set up.
 
 1. iOS 13.1 Emulator
 2. Android 9 Real Device
+
 
 ## To Do
 
