@@ -1,5 +1,5 @@
 import { CommitStoreModel } from "../commit-store/commit-store"
-import { Instance, SnapshotOut, types } from "mobx-state-tree"
+import { Instance, SnapshotOut, types, flow } from "mobx-state-tree"
 import { UserModel } from "../user/user"
 import { SearchModel } from "../search/search"
 
@@ -16,6 +16,13 @@ export const RootStoreModel = types.model("RootStore").props({
   setDarkMode(darkMode: boolean) {
     self.darkMode = darkMode
   },
+})).actions((self) => ({
+  logout: flow(function* () {
+    yield self.user.logout()
+    self.commitStore = {} as any
+    self.search = {} as any
+  }),
+
 }))
 
 /**

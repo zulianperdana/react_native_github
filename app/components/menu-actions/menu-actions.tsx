@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite"
 import { Icon, TopNavigationAction, OverflowMenu, MenuItem } from "@ui-kitten/components"
 import { useStores } from "../../models/root-store/root-store-context"
 import { translate } from "../../i18n"
+import { useNavigation } from "@react-navigation/native"
 
 const MenuIcon = (props) => <Icon {...props} name="more-vertical" />
 
@@ -12,9 +13,10 @@ const MoonIcon = (props) => <Icon {...props} name="moon-outline" />
 const SunIcon = (props) => <Icon {...props} name="sun-outline" />
 
 export const MenuActions = observer(function MenuActions() {
+  const navigation = useNavigation()
   const [menuVisible, setMenuVisible] = React.useState(false)
-  const { darkMode, setDarkMode } = useStores()
-
+  const { darkMode, setDarkMode, user, logout } = useStores()
+  const { clearPassword } = user
   const toggleMenu = () => {
     setMenuVisible(!menuVisible)
   }
@@ -37,7 +39,15 @@ export const MenuActions = observer(function MenuActions() {
             title={translate("settings.dark_mode")}
           />
         )}
-        <MenuItem accessoryLeft={LogoutIcon} title="Logout" />
+        <MenuItem
+          onPress={() => {
+            clearPassword()
+            // TO DO : need a better way
+            setTimeout(logout, 1000)
+          }}
+          accessoryLeft={LogoutIcon}
+          title="Logout"
+        />
       </OverflowMenu>
     </React.Fragment>
   )
