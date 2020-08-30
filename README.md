@@ -41,9 +41,9 @@ short video demo https://streamable.com/3995wf
 
 Make sure you have your React Native environment set up.
 ```
-1. git clone https://github.com/zulianperdana/react_native_github.git```
+1. git clone https://github.com/zulianperdana/react_native_github.git
 2. cd react_native_github
-3. yarn install / npm install
+3. yarn install
 4. react-native run-ios / react-native run-android
 ```
 
