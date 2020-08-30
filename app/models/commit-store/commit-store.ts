@@ -32,7 +32,9 @@ export const CommitStoreModel = types
           reset ? 1 : currentPage + 1,
         )
         if (result.kind === "ok") {
-          if (result.commits.length === 0) {
+          console.log("a")
+          if (result.commits.length === 0 && !reset) {
+            console.log("b")
             commit.setPaginationDone(true)
           } else {
             commit.setCurrentPage(currentPage + 1)
