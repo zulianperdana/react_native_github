@@ -3,6 +3,7 @@
     "ok": "OK!",
     "next": "Next",
     "cancel": "Cancel",
+    "close": "Close",
     "back": "Back"
   },
   "login": {
@@ -14,11 +15,35 @@
     "password_greetings_description": "Please input your password / personal access token",
     "password_validation_1": "Invalid credentials"
   },
+  "commits": {
+    "see_details": "See Details",
+    "comments": "Comments",
+    "load_more": "Load More",
+    "no_more_data": "No More Data",
+    "show_only_my_commits": "Show only my commits",
+    "commits_not_found": "Commits not found"
+  },
   "home": {
-    "search_label": "Search Repository"
+    "search_label": "Search Repository",
+    "repository_not_found": "Repository not Found",
+    "search_histories": "Search Histories",
+    "search_suggestions": "Suggestions"
   },
   "settings": {
     "dark_mode": "Dark Mode",
     "light_mode": "Light Mode"
+  },
+  "errors":{
+    "temporary": "Temporary Erorr",
+    "error": "Error",
+    "timeout": "Connection Timeout",
+    "cannot-connect": "Connection not found",
+    "server": "Internal server error",
+    "unauthorized": "Unauthorized",
+    "forbidden": "Fobidden",
+    "not-found": "Not Found",
+    "rejected": "Rejected",
+    "unknown": "Unknown",
+    "bad-data": "Bad Data"
   }
 }

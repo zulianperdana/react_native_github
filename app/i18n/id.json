@@ -1,12 +1,49 @@
 {
   "common": {
     "ok": "OK!",
-    "next": "Next",
-    "cancel": "Cancel",
-    "back": "Back"
+    "next": "Selanjutnya",
+    "cancel": "Batalkan",
+    "close": "Tutup",
+    "back": "Kembali"
   },
   "login": {
-    "greetings": "How Dy",
-    "greetings_description": "Login using your Github Account to get started"
+    "greetings": "Selamat Datang",
+    "password_greetings": "Halo, ",
+    "username_validation_1": "Minimal terdapat 1 karakter",
+    "username_validation_2": "User tidak ditemukan",
+    "greetings_description": "Login menggunakan akun Github mu",
+    "password_greetings_description": "Silahkan masukan password / personal access token",
+    "password_validation_1": "Password salah"
+  },
+  "commits": {
+    "see_details": "Lihat Detail",
+    "comments": "Komentar",
+    "load_more": "Load More",
+    "no_more_data": "Tidak terdapat data lagi",
+    "show_only_my_commits": "Hanya tampilkan komit ku",
+    "commits_not_found": "Komit tidak ditemukan"
+  },
+  "home": {
+    "search_label": "Cari Repositori",
+    "repository_not_found": "Repositori tidak ditemukan",
+    "search_histories": "Riwayat Pencatian",
+    "search_suggestions": "Sugesti"
+  },
+  "settings": {
+    "dark_mode": "Dark Mode",
+    "light_mode": "Light Mode"
+  },
+  "errors":{
+    "temporary": "Temporary Erorr",
+    "error": "Error",
+    "timeout": "Connection Timeout",
+    "cannot-connect": "Connection not found",
+    "server": "Internal server error",
+    "unauthorized": "Unauthorized",
+    "forbidden": "Fobidden",
+    "not-found": "Not Found",
+    "rejected": "Rejected",
+    "unknown": "Unknown",
+    "bad-data": "Bad Data"
   }
 }
