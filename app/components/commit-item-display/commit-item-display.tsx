@@ -36,13 +36,14 @@ const styles = StyleSheet.create({
 })
 
 export interface CommitItemDisplayProps {
-  commit: any
+  commit: any,
+  repository: string
 }
 
 /**
  * Describe your component here
  */
-export function CommitItemDisplay({ commit }: any) {
+export function CommitItemDisplay({ commit, repository }: any) {
   const { author, authorTime, commentCount, commiterTime, committer, message, sha } = commit.item
   const timeAgoRenderer = (props) => <Text category="c1" {...props} />
   const renderAvatar = (user: UserDetails, type: string, time: Date) => {
@@ -73,7 +74,7 @@ export function CommitItemDisplay({ commit }: any) {
   const Footer = (props) => (
     <View {...props}>
       <Button
-        onPress={() => Linking.openURL(`https://github.com/facebook/react-native/commit/${sha}`)}
+        onPress={() => Linking.openURL(`https://github.com/${repository}/commit/${sha}`)}
         size="small"
       >
         {translate("commits.see_details")} ({commentCount}) {translate("commits.comments")}

@@ -67,7 +67,7 @@ export const CommitsScreen = observer(function CommitsScreen({ route }: any) {
     </Layout>
   )
 
-  const renderCommit = (commit) => <CommitItemDisplay key={commit.sha} commit={commit} />
+  const renderCommit = (commit) => <CommitItemDisplay repository={repository} key={commit.sha} commit={commit} />
 
   const onRefresh = async () => {
     setRefreshing(true)
