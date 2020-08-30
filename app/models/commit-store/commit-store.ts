@@ -80,6 +80,7 @@ export const CommitStoreModel = types
       } else {
         __DEV__ && console.tron.log(result.kind)
       }
+      return false
     }),
   })) // eslint-disable-line @typescript-eslint/no-unused-vars
 

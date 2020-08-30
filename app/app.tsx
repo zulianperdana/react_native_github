@@ -16,13 +16,11 @@ import { NavigationContainerRef } from "@react-navigation/native"
 import * as eva from "@eva-design/eva"
 import { ApplicationProvider, IconRegistry } from "@ui-kitten/components"
 import { SafeAreaProvider, initialWindowSafeAreaInsets } from "react-native-safe-area-context"
-import * as storage from "./utils/storage"
 import {
   useBackButtonHandler,
   RootNavigator,
   canExit,
   setRootNavigation,
-  useNavigationPersistence,
 } from "./navigation"
 import { RootStore, RootStoreProvider, setupRootStore, useStores } from "./models"
 

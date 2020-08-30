@@ -5,7 +5,6 @@ import { Text, Screen, Input, LoadingIndicator, BackButton } from "../../compone
 import { translate } from "../../i18n"
 import { Layout, Button, Avatar, Text as KittenText, Icon } from "@ui-kitten/components"
 import { useStores } from "../../models/root-store/root-store-context"
-import { useNavigation } from "@react-navigation/native"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../../models"
 
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
 
 export const PasswordScreen = observer(function PasswordScreen() {
   // Pull in one of our MST stores
-  const navigation = useNavigation()
   const [secureTextEntry, setSecureTextEntry] = useState(true)
   const { user } = useStores()
   const [status, setStatus] = useState("basic")

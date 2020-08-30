@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { observer } from "mobx-react-lite"
-import { StyleSheet, SafeAreaView, RefreshControl, FlatList, TouchableOpacity } from "react-native"
+import { StyleSheet, SafeAreaView, FlatList, TouchableOpacity } from "react-native"
 import { Layout, useTheme, Toggle } from "@ui-kitten/components"
 import {
   Screen,
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   empty: {
     alignItems: "center",
-    marginTop: 50
+    marginTop: 50,
   },
   footer: {
     alignItems: "center",
@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   listHeaderLayout: {
-    marginBottom: 12,
     alignItems: "flex-end",
+    marginBottom: 12,
   },
 })
 

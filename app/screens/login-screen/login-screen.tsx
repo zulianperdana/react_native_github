@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle, SafeAreaView, Image, ImageStyle, TextInput, StyleSheet } from "react-native"
+import { SafeAreaView, Image, StyleSheet } from "react-native"
 import { Text, Screen, Input, LoadingIndicator } from "../../components"
 import { translate } from "../../i18n"
 import { Layout, Button } from "@ui-kitten/components"

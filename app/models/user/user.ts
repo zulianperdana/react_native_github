@@ -66,6 +66,7 @@ export const UserModel = types
         self.setTempUser(result.user)
         return result.user
       }
+      return null
     }),
     loadPassword: flow(function* () {
       const { password } = yield load()

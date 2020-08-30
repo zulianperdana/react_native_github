@@ -1,7 +1,6 @@
 import * as React from "react"
 import { View, StyleSheet, Linking } from "react-native"
 import { Text } from "../"
-import { CommitItem } from "../../models/commit/commit"
 import { Card, Layout, Avatar, Button, Tooltip } from "@ui-kitten/components"
 import { UserDetails } from "../../models/user/user"
 import { TouchableWithoutFeedback } from "react-native-gesture-handler"

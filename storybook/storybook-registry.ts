@@ -1,3 +1,8 @@
+require("../app/components/commit-item-display/commit-item-display.story")
+require("../app/components/menu-actions/menu-actions.story")
+require("../app/components/loading-indicator/loading-indicator.story")
+require("../app/components/back-button/back-button.story")
+require("../app/components/input/input.story")
 require("../app/components/text/text.story")
 require("../app/components/button/button.story")
 require("../app/components/form-row/form-row.story")

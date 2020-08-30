@@ -10,7 +10,6 @@ import { NavigationContainer, NavigationContainerRef } from "@react-navigation/n
 import { createNativeStackNavigator } from "react-native-screens/native-stack"
 import { PrimaryNavigator } from "./primary-navigator"
 import { AuthNavigator } from "./auth-navigator"
-import { useStores } from "../models"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
