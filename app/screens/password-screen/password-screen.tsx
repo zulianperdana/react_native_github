@@ -54,11 +54,9 @@ export const PasswordScreen = observer(function PasswordScreen() {
       setLoading(true)
       try {
         const success: boolean = await login(username, passwordForm)
-        if (success) {
-          navigation.navigate("home")
-        } else {
+        if (!success) {
           setStatus("danger")
-          setCaption("login.username_validation_2")
+          setCaption("login.password_validation_1")
         }
       } finally {
         setLoading(false)
@@ -94,6 +92,7 @@ export const PasswordScreen = observer(function PasswordScreen() {
         <Input
           label="Password / Access Token"
           secureTextEntry={secureTextEntry}
+          autoFocus={true}
           status={status}
           caption={caption !== "" ? translate(caption) : ""}
           value={passwordForm}

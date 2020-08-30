@@ -92,6 +92,7 @@ export const LoginScreen = observer(function LoginScreen() {
           value={usernameForm}
           autoCapitalize="none"
           onSubmitEditing={onPressNext}
+          autoFocus={true}
           onChangeText={(nextValue) => setUsernameForm(nextValue)}
         />
       </Layout>
