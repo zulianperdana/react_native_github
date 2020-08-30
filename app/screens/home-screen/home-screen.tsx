@@ -35,6 +35,10 @@ export const HomeScreen = observer(function HomeScreen() {
   const { user, search, commitStore } = useStores()
   const navigation = useNavigation()
   const { userDetails, password } = user
+  const [status, setStatus] = useState("basic")
+  const [caption, setCaption] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [searchForm, setSearchForm] = useState("facebook/react-native")
   const {
     searchSuggestions,
     fetchSuggestions,
@@ -44,10 +48,6 @@ export const HomeScreen = observer(function HomeScreen() {
   } = search
   const { loadRepository } = commitStore
   const { avatarUrl, username } = userDetails
-  const [status, setStatus] = useState("basic")
-  const [caption, setCaption] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [searchForm, setSearchForm] = useState("facebook/react-native")
 
   const onGoToRepository = async (repository: string) => {
     setStatus("basic")
@@ -86,7 +86,7 @@ export const HomeScreen = observer(function HomeScreen() {
   )
   const renderLoadingIndicator = () => <LoadingIndicator />
   const debounceFetchSuggestion = useCallback(
-    debounce((search: string) => fetchSuggestions(search), 500),
+    debounce((search: string) => fetchSuggestions(search, username, password), 250),
     [],
   )
 
@@ -142,9 +142,11 @@ export const HomeScreen = observer(function HomeScreen() {
             {searchSuggestions.map(renderOption)}
           </Card>
         )}
-        <Card style={styles.card} header={renderCardHeader}>
-          {searchHistories.map(searchHistoryItem)}
-        </Card>
+        {searchHistories.length > 0 && (
+          <Card style={styles.card} header={renderCardHeader}>
+            {searchHistories.map(searchHistoryItem)}
+          </Card>
+        )}
       </Layout>
       <SafeAreaView />
     </Screen>
