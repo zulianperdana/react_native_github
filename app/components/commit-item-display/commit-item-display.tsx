@@ -64,7 +64,7 @@ export function CommitItemDisplay({ commit }: any) {
           {user.username} {type}
         </Text>
         <Tooltip anchor={renderTimeago} visible={visible} onBackdropPress={() => setVisible(false)}>
-          {time}
+          {new Date(time).toDateString()}
         </Tooltip>
       </Layout>
     )
