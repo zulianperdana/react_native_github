@@ -7,7 +7,7 @@
 import React from "react"
 
 import { createNativeStackNavigator } from "react-native-screens/native-stack"
-import { HomeScreen } from "../screens"
+import { HomeScreen, CommitsScreen } from "../screens"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -38,6 +38,7 @@ export function PrimaryNavigator() {
       }}
     >
       <Stack.Screen name="home" component={HomeScreen} />
+      <Stack.Screen name="commits" component={CommitsScreen} />
     </Stack.Navigator>
   )
 }

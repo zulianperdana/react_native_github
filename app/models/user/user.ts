@@ -2,7 +2,7 @@ import { Instance, SnapshotOut, types, flow } from "mobx-state-tree"
 import { withEnvironment } from "../extensions/with-environment"
 import { GithubLoginResult } from "../../services/api/api.types"
 import { omit } from "ramda"
-import { save, load } from "../../utils/keychain"
+import { save, load, reset } from "../../utils/keychain"
 
 export interface UserDetails {
   username: string
@@ -35,8 +35,12 @@ export const UserModel = types
     setUsername(username: string) {
       self.username = username
     },
-    logout() {
+    clearPassword() {
       self.password = ""
+    },
+    clearState() {
+      self.password = ""
+      console.log("PASSWORD IS EMPTY")
       self.userDetails = null
       self.tempUserDetails = null
     },
@@ -49,6 +53,11 @@ export const UserModel = types
         yield save(result.user.username, password)
         return true
       }
+      return false
+    }),
+    logout: flow(function* () {
+      yield reset()
+      self.clearState()
       return false
     }),
     checkUsername: flow(function* (username: string) {

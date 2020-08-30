@@ -62,13 +62,13 @@ const RootStack = ({ isLoggedIn }: any) => {
 
 export const RootNavigator = React.forwardRef<
   NavigationContainerRef,
-  Partial<React.ComponentProps<typeof NavigationContainer>>
->((props, ref) => {
-  const { user } = useStores()
-  const { password } = user
+  Partial<React.ComponentProps<any>>
+>((props: any, ref) => {
+  const { password } = props
+  console.log("PASSWORD IS", password)
   return (
     <NavigationContainer {...props} ref={ref}>
-      <RootStack isLoggedIn={password !== undefined} />
+      <RootStack isLoggedIn={password !== undefined && password !== ""} />
     </NavigationContainer>
   )
 })
