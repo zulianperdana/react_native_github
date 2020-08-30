@@ -1,7 +1,4 @@
-
-# Github
-
-## React Native Github
+#  React Native Github
 
 React Native Github Commit Explorer.
 short video demo https://streamable.com/3995wf
@@ -27,13 +24,15 @@ short video demo https://streamable.com/3995wf
 
 ## Screenshoots
 
+![](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss1.png?raw=true)
+
 1             |  2
 :-------------------------:|:-------------------------:
-![enter image description here](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss1.png?raw=true =350x)  |  ![enter image description here](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss2.png?raw=true =350x)
+![](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss1.png?raw=true)  |  ![](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss2.png?raw=true)
 
 3             |  4
 :-------------------------:|:-------------------------:
-![enter image description here](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss3.png?raw=true =350x)  |  ![enter image description here](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss5.png?raw=true =350x)
+![](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss3.png?raw=true)  |  ![](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss5.png?raw=true)
 
 
 ## Made with:
