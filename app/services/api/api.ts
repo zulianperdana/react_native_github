@@ -1,9 +1,20 @@
 import { ApisauceInstance, create, ApiResponse } from "apisauce"
-import { getGeneralApiProblem } from "./api-problem"
+import { Alert } from "react-native"
+import { getGeneralApiProblem, GeneralApiProblem } from "./api-problem"
 import { ApiConfig, DEFAULT_API_CONFIG } from "./api-config"
 import { UserDetails } from "../../models/user/user"
 import { CommitItem } from "../../models/commit/commit"
 import * as Types from "./api.types"
+import { translate } from "../../i18n"
+
+const showAlert = (problem: GeneralApiProblem) => {
+  Alert.alert(
+    problem.temporary ? translate("errors.temporary") : translate("errors.error"),
+    translate(`errors.${problem.kind}`),
+    [{ text: translate("common.close"), onPress: () => console.log("OK Pressed") }],
+    { cancelable: true },
+  )
+}
 
 /**
  * Manages all requests to the API.
@@ -56,7 +67,10 @@ export class Api {
     // the typical ways to die when calling an api
     if (!response.ok) {
       const problem = getGeneralApiProblem(response)
-      if (problem) return problem
+      if (problem) {
+        showAlert(problem)
+        return problem
+      }
     }
 
     // transform the data into the format we are expecting
@@ -87,8 +101,14 @@ export class Api {
     )
     // the typical ways to die when calling an api
     if (!response.ok) {
+      console.log(response)
       const problem = getGeneralApiProblem(response)
-      if (problem) return problem
+      if (problem) {
+        if (problem.kind !== "unauthorized") {
+          showAlert(problem)
+        }
+        return problem
+      }
     }
 
     // transform the data into the format we are expecting
@@ -125,7 +145,10 @@ export class Api {
     // the typical ways to die when calling an api
     if (!response.ok) {
       const problem = getGeneralApiProblem(response)
-      if (problem) return problem
+      if (problem) {
+        // showAlert(problem)
+        return problem
+      }
     }
 
     // transform the data into the format we are expecting
@@ -168,7 +191,10 @@ export class Api {
         problem,
         `/repos/${repository}/commits?per_page=${perPage}&page=${currentPage}${extraQueryString}`,
       )
-      if (problem) return problem
+      if (problem) {
+        showAlert(problem)
+        return problem
+      }
     }
 
     // transform the data into the format we are expecting
