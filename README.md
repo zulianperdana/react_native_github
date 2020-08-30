@@ -24,8 +24,6 @@ short video demo https://streamable.com/3995wf
 
 ## Screenshoots
 
-![](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss1.png?raw=true)
-
 1             |  2
 :-------------------------:|:-------------------------:
 ![](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss1.png?raw=true)  |  ![](https://github.com/zulianperdana/react_native_github/blob/master/screenshoots/ss2.png?raw=true)
