@@ -1,16 +1,8 @@
 import React, { useState, useCallback } from "react"
 import { observer } from "mobx-react-lite"
 import { StyleSheet, SafeAreaView } from "react-native"
-import {
-  TopNavigation,
-  Layout,
-  Avatar,
-  Icon,
-  AutocompleteItem,
-  Autocomplete,
-  Card,
-} from "@ui-kitten/components"
-import { Screen, Text, MenuActions, LoadingIndicator } from "../../components"
+import { TopNavigation, Layout, Avatar, Icon, Card } from "@ui-kitten/components"
+import { Screen, Text, MenuActions, LoadingIndicator, Input } from "../../components"
 import { useStores } from "../../models/root-store/root-store-context"
 import { translate } from "../../i18n"
 import { TouchableWithoutFeedback, TouchableOpacity } from "react-native-gesture-handler"
@@ -29,6 +21,9 @@ const styles = StyleSheet.create({
   },
   logo: {
     marginHorizontal: 16,
+  },
+  repositoryItem: {
+    marginBottom: 12,
   },
   root: {
     flex: 1,
@@ -98,34 +93,41 @@ export const HomeScreen = observer(function HomeScreen() {
     [],
   )
 
-  const renderOption = (item, index) => (
-    <AutocompleteItem
+  const renderOption = (item) => (
+    <TouchableOpacity
+      style={styles.repositoryItem}
+      key={item}
       onPress={() => {
         setSearchForm(item)
         onGoToRepository(item)
       }}
-      key={index}
-      title={item}
-    />
+    >
+      <Text category="label">{item}</Text>
+    </TouchableOpacity>
   )
 
   const renderCardHeader = () => (
     <Text style={styles.cardHeader} category="s1" tx="home.search_histories" />
   )
+  const renderSuggestionsCardHeader = () => (
+    <Text style={styles.cardHeader} category="s1" tx="home.search_suggestions" />
+  )
   const searchHistoryItem = (item) => (
-    <TouchableOpacity onPress={() => navigation.navigate("commits", { repository: item })}>
-      <Text key={item} category="label">
-        {item}
-      </Text>
+    <TouchableOpacity
+      style={styles.repositoryItem}
+      key={item}
+      onPress={() => navigation.navigate("commits", { repository: item })}
+    >
+      <Text category="label">{item}</Text>
     </TouchableOpacity>
   )
 
   return (
-    <Screen style={styles.root}>
+    <Screen preset="scroll" style={styles.root}>
       <SafeAreaView />
       <TopNavigation title={renderTitle} accessoryRight={MenuActions} />
       <Layout style={styles.body}>
-        <Autocomplete
+        <Input
           label={translate("home.search_label")}
           status={status}
           caption={caption !== "" ? translate(caption) : ""}
@@ -137,9 +139,12 @@ export const HomeScreen = observer(function HomeScreen() {
             setSearchForm(nextValue)
             debounceFetchSuggestion(nextValue)
           }}
-        >
-          {searchSuggestions.map(renderOption)}
-        </Autocomplete>
+        />
+        {searchSuggestions.length > 0 && (
+          <Card header={renderSuggestionsCardHeader} style={styles.card}>
+            {searchSuggestions.map(renderOption)}
+          </Card>
+        )}
         <Card style={styles.card} header={renderCardHeader}>
           {searchHistories.map(searchHistoryItem)}
         </Card>
